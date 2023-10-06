@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int top = -1;
+int max;
+
+void push(int value, int stack[]);
+void pop(int stack[]);
+void peek(int stack[]);
+
+int main()
+{
+    int selection, value;
+    printf("Enter size of the stack: ");
+    scanf("%d", &max);
+    int stack[max];
+
+    while (1) {
+        printf("\nSelect operation to perform on stack\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Peek\n");
+        printf("4. Exit\n");
+        printf(" : ");
+        scanf("%d", &selection);
+
+        switch (selection) {
+            case 1:
+                printf("Enter the value to push: ");
+                scanf("%d", &value);
+                push(value, stack);
+                break;
+            case 2:
+                pop(stack);
+                break;
+            case 3:
+                peek(stack);
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+
+void push(int value, int stack[])
+{
+    if (top == max - 1){
+        printf("\nStack Overflow\n");
+        exit(0);
+    } else {
+        top++;
+        stack[top]= value;
+    }
+}
+
+void pop(int stack[]){
+    if (top == -1){
+        printf("\nStack Underflow\n");
+        exit(0);
+    } else {
+        int value = stack[top];
+        top--;
+        printf("\n%d has been popped from stack\n", value);
+    }
+}
+
+void peek(int stack[]){
+    printf("\nTop element is %d\n", stack[top]);
+}
